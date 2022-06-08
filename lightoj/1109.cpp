@@ -1,25 +1,24 @@
 #include<iostream>
 #include<stdio.h>
 #include<math.h>
+#include<map>
 typedef long long ll;
 
-#define sll(x) scanf("%llu",&x);
 #define sd(x) scanf("%d",&x);
-#define slf(x) scanf("%lf",&x);
-#define ptll(x) printf("%lld\n",x);
-#define ps(s) printf("%s", s)
+#define sdd(x,y) scanf("%d %d",&x, &y);
 #define ForC(cs,t) for(int cs = 1 ; cs <= t ; cs++)
+#define ps(s) printf("%s\n", s)
 
 
 using namespace std;
 
 int main(){
-    freopen("output.txt","w",stdout);
-    int t,x;
+    int t, x1, x2, y1,y2,m,mX,mY,output;
     sd(t);
     ForC(cs,t){
-        sd(x);
-        printf("Case %d: %d\n", cs, x);
+        map<int, int> m = {};
+
+        printf("Case %d:\n", cs);
     }
     return 0;
 
