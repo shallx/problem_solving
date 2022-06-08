@@ -13,6 +13,8 @@ typedef long long ll;
 
 using namespace std;
 
+// #define pii pair<int,int>
+
 int main(){
     freopen("output.txt","w",stdout);
     int t,x;
