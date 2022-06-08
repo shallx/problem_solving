@@ -17,12 +17,13 @@ using namespace std;
 // #define pii pair<int,int>
 
 int main(){
-    freopen("output.txt","w",stdout);
-    int t,x;
+    int t,a,b,output;
     sd(t);
     ForC(cs,t){
-        sd(x);
-        printf("Case %d: %d\n", cs, x);
+        cin >> a >> b;
+        output = b-a;
+        output = ceil((b-a)/2);
+        printf("Case %d: %d\n", cs, output);
     }
     return 0;
 
