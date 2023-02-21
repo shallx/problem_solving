@@ -2,6 +2,7 @@
 #include <vector>
 #include <list>
 #include <math.h>
+#include <map>
 
 #define sd(x) scanf("%d", &x);
 #define sdd(x, y) scanf("%d %d", &x, &y);
@@ -9,19 +10,27 @@
 
 using namespace std;
 
+map<int, bool> vis;
+map<int, int> whichType;
+
+void clear()
+{
+    vis.clear();
+    whichType.clear();
+}
+
 class Graph
 {
     int nodes;
     vector<int> *v;
-    vector<bool> visited;
-    vector<bool> lykans;
-    vector<bool> vampires;
+public:
     int lykansCount = 0;
     int vampiresCount = 0;
 
 public:
     Graph(int vertices);
     void addEdge(int src, int dest);
+    void resetCount();
     int BFS(int startVertex);
 };
 
@@ -37,45 +46,43 @@ void Graph::addEdge(int src, int dest)
     v[dest].push_back(src);
 }
 
+void Graph::resetCount()
+{
+    lykansCount = 0;
+    vampiresCount = 0;
+}
+
 int Graph::BFS(int startVertex)
 {
 
-    for (int i = 0; i < nodes; i++)
-    {
-        visited.push_back(false);
-        lykans.push_back(false);
-        vampires.push_back(false);
-    }
-
     list<int> queue;
     queue.push_back(startVertex);
-    visited[startVertex] = true;
-    lykans[startVertex] = true;
+    vis[startVertex] = true;
+    whichType[startVertex] = 1;
     lykansCount++;
 
     while (!queue.empty())
     {
         int currentNode = queue.front();
-        // cout << "Visited: " << currentNode << endl;
         queue.pop_front();
 
         vector<int>::iterator it;
 
         for (it = v[currentNode].begin(); it != v[currentNode].end(); it++)
         {
-            if (!visited[*it])
+            if (!vis[*it])
             {
-                visited[*it] = true;
+                vis[*it] = true;
                 queue.push_back(*it);
-                if (lykans[currentNode])
+                if (whichType[currentNode] == 1)
                 {
-                    vampires[*it] = true;
+                    whichType[*it] = 2;
                     vampiresCount++;
                 }
                 else
                 {
-                    lykans[*it] = true;
-                    vampiresCount++;
+                    whichType[*it] = 1;
+                    lykansCount++;
                 }
             }
         }
@@ -85,20 +92,34 @@ int Graph::BFS(int startVertex)
 
 int main()
 {
-    freopen("output.txt", "w", stdout);
+    // freopen("output.txt", "w", stdout);
     int t, u, v, n;
     sd(t);
     ForC(cs, t)
     {
+        clear();
         sd(n);
         Graph g(20001);
         ForC(i, n)
         {
             sdd(u, v);
             g.addEdge(u, v);
+            vis[u] = false;
+            vis[v] = false;
         }
-        int result = g.BFS(1);
-        printf("Case %d: %d\n", cs, result);
+        // int result = g.BFS(1);
+        int sum = 0;
+        map<int, bool>::iterator it;
+        for (map<int, bool>::iterator it = vis.begin(); it != vis.end(); it++)
+        {
+            if (!it->second)
+            {
+                g.resetCount();
+                int res = g.BFS(it->first);
+                sum += res;
+            }
+        }
+        printf("Case %d: %d\n", cs, sum);
     }
 
     return 0;
