@@ -25,6 +25,20 @@ const ll N = 3e5 + 5;
 const ll MAX = 3e5 + 5; 
 const ll M = 1e6 + 5; 
 const int mod = 1e18 + 7; 
+
+#define sd(x) scanf("%d",&x);
+#define sdd(x,y) scanf("%d %d", &x,&y);
+#define sddd(x,y,z) scanf("%d %d %d", &x,&y,&z);
+#define sll(x) scanf("%llu",&x);
+#define slf(x) scanf("%lf",&x);
+#define ptll(x) printf("%lld\n",x);
+#define ps(s) printf("%s", s)
+#define For(i,n) for(int cs = 0 ; cs < n ; i++)
+#define ForC(cs,t) for(int cs = 1 ; cs <= t ; cs++)
+#define For4(i,n,s,inc) for(int i = s ; i < n ; i+=inc)
+// #define pii pair<int,int>
+
+
 ll MODULAR_POWER(ll a , ll b , ll MOD) { 
     if(b == 0) return 1LL; 
     ll d = MODULAR_POWER(a , b / 2 , MOD); 
