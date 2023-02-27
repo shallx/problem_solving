@@ -11,26 +11,34 @@ using namespace std;
 
 // vector<int> v[10];
 vector<int> vec[MAX];
+int ct = 0;
 bool visited[MAX];
 
-void cleanVisited(){
-    for(int i=0;i<MAX;i++){
+void cleanVisited()
+{
+    for (int i = 0; i < MAX; i++)
+    {
         visited[i] = false;
     }
 }
 
-void cleanAdj(int n){
-    for(int i=0;i<n;i++){
+void cleanAdj(int n)
+{
+    for (int i = 0; i < n; i++)
+    {
         vec[i].clear();
     }
 }
 
-void dfs(int startIndex){
+void dfs(int startIndex)
+{
     visited[startIndex] = true;
-
-    for(auto it = vec[startIndex].begin(); it!= vec[startIndex].end(); it++){
-        if(!visited[*it]){
-            visited[*it];
+    for (auto it = vec[startIndex].begin(); it != vec[startIndex].end(); it++)
+    {
+        ct++;
+        if (!visited[*it])
+        {
+            visited[*it] = true;
             dfs(*it);
         }
     }
@@ -38,11 +46,12 @@ void dfs(int startIndex){
 
 int main()
 {
-    int t, v, a, x, y;
+    int t, v, a, x, y, startIndex;
     string s;
     sd(t);
     ForC(cs, t)
     {
+        sd(startIndex);
         sdd(v, a);
         ForC(i, a)
         {
@@ -51,8 +60,10 @@ int main()
             vec[y].push_back(x);
         }
 
+        dfs(startIndex);
+        cout << "Result: " << ct << endl;
+
         cleanVisited();
         cleanAdj(v);
-
     }
 }
