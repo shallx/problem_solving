@@ -9,6 +9,10 @@ int main(){
 
     int length = s.length();
 
+    if(length % 2 == 1) {
+        return false;
+    }
+
     stack<char> st;
 
     for(int i=0;i<length;i++){
