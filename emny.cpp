@@ -17,7 +17,6 @@ int main()
     {
         if (v[i] * v[i] == v[j] * v[j])
         {
-            cout << "Its all same" << endl;
             result.push_front(v[i] * v[i]);
             result.push_front(v[i] * v[i]);
             i++;
@@ -25,13 +24,11 @@ int main()
         }
         else if (i * i > j * j)
         {
-            cout << "I is greater" << endl;
             result.push_front(v[i] * v[i]);
             i++;
         }
         else
         {
-            cout << "J is greater" << endl;
             result.push_front(v[j] * v[j]);
             j--;
         }
@@ -39,7 +36,8 @@ int main()
 
     for (auto it : result)
     {
-        cout << it << " " << endl;
+        cout << it << " ";
     }
+    cout << endl;
     return 0;
 }
