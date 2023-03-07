@@ -16,7 +16,7 @@ class Solution {
 public:
     long long minimumTime(vector<int>& time, int totalTrips) {
         long long int left = 0;
-        long long int right = totalTrips * (long long)getMin(time);
+        long long int right = time[0] * (long long)getMin(time);
         cout << "Right: " << right << endl;
         long long int mid = (left + right)/2;
         int n = time.size();
