@@ -13,19 +13,12 @@ struct ListNode
     ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 
-void listToLinkInsertion(ListNode* node, int* arr, int size);
-void listToLinkInsertion(ListNode* node, int* arr, int size);
+ListNode* listToLinkInsertion(vector<int> arr);
 void LinkedListPrinter(ListNode *root);
 
 class Solution {
 public:
     vector<int> linkedListToNumber(ListNode* root){
-        // int num = 0,multiplier = 1;
-        // for(ListNode* iteratorNode = root; iteratorNode != nullptr; iteratorNode = iteratorNode->next){
-        //     num += iteratorNode->val * multiplier;
-        //     multiplier *= 10;
-        // }
-        // return num;
         vector<int> v{};
         for(ListNode* it = root; it != nullptr; it = it->next){
             v.push_back(it->val);
@@ -56,16 +49,19 @@ public:
         int nMax = max(n1,n2);
         ListNode* root = new ListNode();
         ListNode* node = root;
-        for(int i=1; i<=nMax; i++){
+        for(int i=0; i<nMax; i++){
             int sum = remaining;
-            if(i < n1) sum += v1[n1-i];
-            if(i < n2) sum += v2[n2-i];
-            printf("v[%d]: %d | v[%d]: %d | sum:%d\n", n1-i, v1[n1-i], n2-i,v2[n2-i], sum % 10);
+            if(i < n1) sum += v1[i];
+            if(i < n2) sum += v2[i];
+            // printf("v[%d]: %d | v[%d]: %d | remain: %d | sum:%d\n", n1-i, v1[i], n2-i,v2[i],remaining, sum % 10);
             node->next = new ListNode(sum % 10);
             node = node->next;
             remaining = sum / 10;
         }
-        printf("\n");
+        if(remaining > 0){
+            node->next = new ListNode(remaining);
+        }
+        // printf("\n");
 
         return root->next;
     }
@@ -80,30 +76,30 @@ public:
 };
 
 int main(){
-    ListNode* list1 = new ListNode(2);
-    int arr1[] = {2,4,3};
-    listToLinkInsertion(list1, arr1, 3);
+    // vector<int> arr1 = {2,4,9};
+    // vector<int> arr2 = {5,6,4,9};
+    vector<int> arr1 = {9,9,9,9,9,9,9};
+    vector<int> arr2 = {9,9,9,9};
+    ListNode* list1 = listToLinkInsertion(arr1);
 
-    ListNode* list2 = new ListNode(5);
-    int arr2[] = {5,6,4};
-    listToLinkInsertion(list2, arr2, 3);
+    ListNode* list2 = listToLinkInsertion(arr2);
 
     Solution sol = Solution();
-    ListNode* resultNode = sol.addTwoNumbers(list1,list2);
+    ListNode* resultNode = sol.addTwoNumbers(list1, list2);
 
     LinkedListPrinter(resultNode);
     return 0;
 }
 
-void listToLinkInsertion(ListNode* node, int* arr, int size){
-    ListNode* iteratorNode = node;
-    for(int i = 1; i < size; i++){
+ListNode* listToLinkInsertion(vector<int> arr){
+    ListNode* root = new ListNode(arr[0]);
+    ListNode* iteratorNode = root;
+    for(int i = 1; i < arr.size(); i++){
         ListNode* tempNode = new ListNode(arr[i]);
         iteratorNode->next = tempNode;
         iteratorNode = iteratorNode->next;
     }
-
-
+    return root;
 }
 
 void LinkedListPrinter(ListNode *root){
