@@ -1,4 +1,6 @@
-*.exe
-*.exec
+*
+!*.*
+!*/
 .vscode
+.DS_Store
 output.txt
