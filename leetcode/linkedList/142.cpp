@@ -14,16 +14,15 @@ public:
         if(head == NULL) return NULL;
         ListNode* slow = head;
         ListNode* fast = head;
+        if((slow->next != NULL && slow->next->next != NULL) && slow->next == slow->next->next->next) return head;
 
         while(slow != NULL && fast != NULL && fast->next != NULL){
             slow = slow->next;
             fast = fast->next->next;
             printf("slow:%d fast:%d\n", slow->val, fast->val);
-            if(slow == fast) return slow;
+            if(slow == fast) return slow->next;
         }
-        return (fast == NULL || fast->next == NULL) ? NULL : slow;
-        return slow;
-        
+        return NULL;
     }
 };
 
@@ -44,4 +43,8 @@ int main(){
     newNode->next = cycleNode;
     cout << sol.detectCycle(head)->val << endl;
     return 0;
+}
+
+ListNode* nodeInsertion(){
+
 }
