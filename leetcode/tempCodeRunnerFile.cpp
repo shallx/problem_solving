@@ -1,0 +1,1 @@
+checkingChar != s[i]

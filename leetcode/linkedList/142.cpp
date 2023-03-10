@@ -20,7 +20,14 @@ public:
             slow = slow->next;
             fast = fast->next->next;
             printf("slow:%d fast:%d\n", slow->val, fast->val);
-            if(slow == fast) return slow->next;
+            if(slow == fast){
+                 slow = head;
+                while(slow!=fast){
+                    fast = fast->next;
+                    slow = slow->next;
+                }
+                return slow;
+            };
         }
         return NULL;
     }
